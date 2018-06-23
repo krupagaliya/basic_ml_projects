@@ -1,16 +1,21 @@
+# Credit goes to ***Lazy Programmer***
+
 import numpy as np
 import matplotlib.pyplot as plt
 
 #randn defines gaussian destribution
+
 # adding of np.array defines the position of plotting points in scatter graph
 Nclass = 300
 x1 = np.random.randn(Nclass,2) + np.array([0,-2])
 x2 = np.random.randn(Nclass,2) + np.array([2,2])
 x3 = np.random.randn(Nclass,2) + np.array([-2,4])
 
+#arrange in column
 X = np.vstack([x1,x2,x3])
 print(X)
 
+#labeled Y 
 Y = np.array([0]*Nclass+[1]*Nclass+[2]*Nclass)
 print(Y)
 
@@ -34,7 +39,7 @@ def forward(X,w1,b1,w2,b2):
 
 #determine classification rate	
 #Y as in labeled 
-# P ours predicted
+# P is ours predicted
 def classification_score(Y,P):
 	n_correct = 0
 	n_total = 0
@@ -43,7 +48,6 @@ def classification_score(Y,P):
 		if Y[i] == P[i]:
 			n_correct+=1
 	return float(n_correct)/n_total		
-
 
 #setting dimentionals
 input_set = 2
@@ -55,8 +59,6 @@ w1 = np.random.randn(input_set,Hidden_layer_size)
 b1 = np.random.randn(Hidden_layer_size)
 w2 = np.random.randn(Hidden_layer_size,multi_class)
 b2 = np.random.randn(multi_class)
-
-
 
 
 training = forward(X,w1,b1,w2,b2)
