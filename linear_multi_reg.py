@@ -11,8 +11,8 @@ y  = [[109.85],[155.72],[137.66],[76.17],[139.75],[162.6],[151.77]]
 
 X = np.array(x)
 Y = np.array(y)
-iters = 1500
-alpha = 0.01
+iters = 2000
+alpha = 0.05
 #need to add 1 to each row of Matrix X
 ones = np.ones([X.shape[0],1])
 X = np.concatenate((ones,X),axis=1)
@@ -31,42 +31,21 @@ def computeCost(X,Y,theta):
 cost = computeCost(X,Y,theta)
 print(cost)
 
-
-# def gradientDescent(X,y,theta,iters,alpha):
-#     temp = np.dot(X,theta.T)
-#     temp1 = temp-y
-#     temp2  =temp1*X
-    
-#     cost = np.zeros(iters)
-#     for i in range(iters):
-#         theta = theta - (alpha/len(X)) * np.sum(temp2, axis=0)
-#         cost[i] = computeCost(X, y, theta)
-#     print(cost)
-#     return theta,cost
-# g,cost1 = gradientDescent(X,Y,theta,iters,alpha)
-# #print(g)
-
-# print(cost1)
-
-def gradientDescent(X,y,theta,iters,alpha):
+def gradientDescent(X,y,theta,iters,alpha):  
     cost = np.zeros(iters)
     for i in range(iters):
-        theta = theta - (alpha/len(X)) * np.sum(X * (X @ theta.T - y), axis=0)
+        theta = theta - (alpha/len(X)) * np.sum(X *(np.dot(X,theta.T) - y) , axis=0)
         cost[i] = computeCost(X, y, theta)
-    
+    # print(cost)
     return theta,cost
+g,cost1 = gradientDescent(X,Y,theta,iters,alpha)
+#print(g)
 
-
-alpha = 0.19
-iters = 3000
-
-g,cost = gradientDescent(X,Y,theta,iters,alpha)
-print(g)
+print(cost1)
 
 finalCost = computeCost(X,y,g)
 print("final error",finalCost)
 
-
 #make predictions
-eq = g[0][0] + g[0][1]*(0.49)  + g[0][2]*( 0.18)
+eq = g[0][0] + g[0][1]*(0.57)  + g[0][2]*( 0.83)
 print(eq)
